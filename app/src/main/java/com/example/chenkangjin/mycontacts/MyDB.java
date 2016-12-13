@@ -98,10 +98,11 @@ public class MyDB extends SQLiteOpenHelper{
             return null;
         }
     }
+    //数据库是否存在
     public boolean isTableExits(String tablename){
         try {
             openConnection();
-            String str = "select count(*)xcount from" + tablename;
+            String str = "select count(*)xcount from " + tablename;
             db.rawQuery(str, null).close();
         }catch(Exception e){
             e.printStackTrace();

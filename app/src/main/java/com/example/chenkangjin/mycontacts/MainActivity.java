@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 intent.setClass(this,AddContactsActivity.class);
                 startActivity(intent);
+                listViewAdapter.notifyDataSetChanged();
                 break;
             case 2:
                 if(users[selectItem].getId_DB()>0) {

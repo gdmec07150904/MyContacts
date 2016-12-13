@@ -51,7 +51,12 @@ public class AddContactsActivity extends AppCompatActivity {
                     }else{
                         Toast.makeText(AddContactsActivity.this,"添加失败",Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    Toast.makeText(this,"请先输入数据",Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case 2:
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

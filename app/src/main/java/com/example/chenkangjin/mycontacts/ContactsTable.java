@@ -16,12 +16,12 @@ public class ContactsTable {
     public ContactsTable(Context context){
         db = new MyDB(context);
         if(!db.isTableExits(TABLENAME)){
-            String createTableSql = "CREATE TABLE IF NOT EXISTS"+TABLENAME+"(id_DB integer"+"primary key AUTOINCREMENT,"+
-                    User.NAME+"VARCHAR,"+
-                    User.MOBILE+"VARCHAR,"+
-                    User.QQ+"VARCHAR,"+
-                    User.DANWEI+"VARCHAR,"+
-                    User.ADDRESS+"VARCHAR)";
+            String createTableSql = "CREATE TABLE IF NOT EXISTS "+TABLENAME+"(id_DB integer "+"primary key AUTOINCREMENT,"+
+                    User.NAME+" VARCHAR,"+
+                    User.MOBILE+" VARCHAR,"+
+                    User.QQ+" VARCHAR,"+
+                    User.DANWEI+" VARCHAR,"+
+                    User.ADDRESS+" VARCHAR)";
                     db.createTable(createTableSql);
         }
     }
@@ -38,11 +38,11 @@ public class ContactsTable {
         Vector<User> v = new Vector<User>();
         Cursor cursor = null;
         try {
-            cursor = db.find("select * from" + TABLENAME, null);
+            cursor = db.find("select * from " + TABLENAME, null);
             while (cursor.moveToNext()) {
                 User temp = new User();
                 temp.setId_DB(cursor.getInt(cursor.getColumnIndex("id_DB")));
-                temp.setName(cursor.getColumnName(cursor.getColumnIndex(User.NAME)));
+                temp.setName(cursor.getString(cursor.getColumnIndex(User.NAME)));
                 temp.setMobile(cursor.getString(cursor.getColumnIndex(User.MOBILE)));
                 temp.setQq(cursor.getString(cursor.getColumnIndex(User.QQ)));
                 temp.setAddress(cursor.getString(cursor.getColumnIndex(User.ADDRESS)));
@@ -63,6 +63,7 @@ public class ContactsTable {
             User[] users = new User[1];
             User user = new User();
             user.setName("没有结果");
+            users[0]=user;
             return users;
         }
     }
@@ -70,7 +71,7 @@ public class ContactsTable {
         Cursor cursor = null;
         User temp = new User();
         try{
-            cursor = db.find("select * from"+TABLENAME+"where"+"id_DB=?",new String[]{id+""});
+            cursor = db.find("select * from "+TABLENAME+" where id_DB=?",new String[]{id+""});
             cursor.moveToNext();
             temp.setId_DB(cursor.getInt(cursor.getColumnIndex("id_DB")));
             temp.setName(cursor.getString(cursor.getColumnIndex(User.NAME)));
@@ -103,10 +104,10 @@ public class ContactsTable {
         Vector<User> v = new Vector<User>();
         Cursor cursor = null;
         try{
-            cursor = db.find("select * from "+TABLENAME+"where"+
-                    User.NAME+"like'%"+key+"%'"+"or"+
-                    User.MOBILE+"like'%"+key+"%'"+"or"+
-                    User.QQ+"like'%"+key+"%'",null);
+            cursor = db.find("select * from " + TABLENAME+ " where " +
+                    User.NAME+" like '%" + key + "%'  or " +
+                    User.MOBILE + " like '%" + key + "%' or " +
+                    User.QQ +  " like '%" + key + "%'",null);
             while(cursor.moveToNext()){
                 User temp = new User();
                 temp.setId_DB(cursor.getInt(cursor.getColumnIndex("id_DB")));
